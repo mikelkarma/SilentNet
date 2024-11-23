@@ -1,6 +1,6 @@
 ---
 
-**Construção de um Sistema de Comunicação Anônima com Python, C, Java e Tor**
+**Construção de um Sistema de Comunicação Anônima com Python, C, Java e talvez Tor**
 
 O objetivo deste sistema é criar uma plataforma de comunicação anônima e segura, permitindo que os clientes se comuniquem entre si e compartilhem informações de forma confidencial e sem riscos de interceptação. O sistema será composto por dois componentes principais: o **Cliente** e o **Cliente Master**.
 
