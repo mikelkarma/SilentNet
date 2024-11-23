@@ -8,7 +8,7 @@ O objetivo deste sistema é criar uma plataforma de comunicação anônima e seg
 
 Cada cliente do sistema terá uma porta aberta (porta 12137) para comunicação com outros clientes. Além disso, cada cliente terá um **ID único** de identificação. As comunicações entre os clientes serão criptografadas para garantir a confidencialidade das informações trocadas.
 
-Para evitar a repetição de informações, cada dado transmitido terá uma **licença única**. Caso um cliente não possua a licença associada à informação, ele simplesmente rejeitará a mensagem. Assim, evita-se que informações dubuplicadas. As mensagens serão criptografadas utilizando um esquema de criptografia exclusivo, onde somente o **operador** do sistema terá a chave para **descriptografar** a informação original. Os clientes, embora recebam as informações, não terão a capacidade de descriptografá-las, apenas de semear ou propagar os dados.
+Para evitar a repetição de informações, cada dado transmitido terá uma **licença única**. Caso um cliente não possua a licença associada à informação, ele simplesmente rejeitará a mensagem. Assim, evita-se que informações sejam duplicadas. As mensagens serão criptografadas utilizando um esquema de criptografia exclusivo, onde somente o **operador** do sistema terá a chave para **descriptografar** a informação original. Os clientes, embora recebam as informações, não terão a capacidade de descriptografá-las, apenas de semear ou propagar os dados.
 
 #### **Criptografia e Autenticação**:
 
