@@ -5,7 +5,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 import java.util.Base64;
 
-public class CipherVerify {
+public class Main {
 
     // Gerar chave RSA para o cliente
     public static KeyPair generateRSAKey() throws Exception {
@@ -85,8 +85,8 @@ public class CipherVerify {
             PublicKey publicKeyMaster = rsaMasterKeyPair.getPublic();
             PrivateKey privateKeyMaster = rsaMasterKeyPair.getPrivate();
 
-            print("Public Key1: " + publicKeyMaster.Base64.getEncoder().encodeToString(keyAES.getEncoded()));
-            print("Pribate Key2: " +privateKeyMaster.Base64.getEncoder().encodeToString(keyAES.getEncoded()));
+            print("Public Key1: " + Base64.getEncoder().encodeToString(publicKeyMaster.getEncoded()));
+            print("Pribate Key2: " + Base64.getEncoder().encodeToString(privateKeyMaster.getEncoded()));
             
         } catch (Exception e) {
             e.printStackTrace();
