@@ -4,7 +4,7 @@ import java.security.*;
 import java.util.Base64;
 import java.util.UUID;
 
-public class Client {
+public class Main {
     // Gerar chave RSA
     public static KeyPair generateRSAKey() throws Exception {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
@@ -51,24 +51,6 @@ public class Client {
         byte[] decodedData = Base64.getDecoder().decode(data);
         byte[] decryptedData = cipher.doFinal(decodedData);
         return new String(decryptedData);
-    }
-
-    // Assinar dados com a chave privada RSA do Cliente
-    public static String signData(byte[] data, PrivateKey privateKey) throws Exception {
-        Signature signature = Signature.getInstance("SHA256withRSA");
-        signature.initSign(privateKey);
-        signature.update(data);
-        byte[] signedData = signature.sign();
-        return Base64.getEncoder().encodeToString(signedData);
-    }
-
-    // Verificar assinatura com a chave pública RSA
-    public static boolean verifySignature(byte[] data, String signatureStr, PublicKey publicKey) throws Exception {
-        Signature signature = Signature.getInstance("SHA256withRSA");
-        signature.initVerify(publicKey);
-        signature.update(data);
-        byte[] signatureBytes = Base64.getDecoder().decode(signatureStr);
-        return signature.verify(signatureBytes);
     }
 
     // Função para codificar em Base64
@@ -124,12 +106,13 @@ public class Client {
                 + base64enc(info_crypt.getBytes());
         return cryptSilent;
     }
+
     public static void main(String[] args) {
-     try {
-        String net = cryptSilent();
-        print(net);  
-     } catch (Exception e) {
-        e.printStackTrace();
-     }
+        try {
+            String net = SilentNet();
+            System.out.println(net);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
