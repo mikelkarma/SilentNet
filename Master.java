@@ -59,16 +59,11 @@ public class Main {
 
     public static String SilentNet() throws Exception {
         // CHAVE PRIVADA DO MASTER (decodificada de Base64)
-        String privateKeyMasterBase64 = "MIIBPAIBAAQGAnbNdh9+GnzmO2K8pvgybkW+QShj/fzljkMkksHklghwMZ3u+m3LNj8eUG3O+zjqPi6Ogspt8hl9W5OfdrBeP2dW4TuUQZfS7LbdLhDskJjD96MGlD+Rx3+EjQJtW9jIkxqzdcY+8gLvgNYjpxB4Mgc/NFhxrdKmK8KHjDF3KrPqF5yH7pRzqL0dqZ1G5fZfOjA5TxQ++u/FQwE5A1i8A4Cjkq3LPjX6IWVsRjGly6do5xtEFbggt2C6wVXZ5ZcAqCVVXHTpX+yYoEu2TflFTo5sb7Xf+GRzO0lbOg9bjsagk1SszT7ISf2ffzkW3OYH0eTYFP/n4SKnOwEIQDW70xShGF0JKVt/Z//DHDhChhs0VYxtk0x6dpuxGpmJcdQJ3zF7exhuxjiwQyPT1fr0cZ7AN7zY0QtANg00yDmtPrZq2FqsFOIuk1fFFl3oeu/Uw==";
+        String privateKeyMasterBase64 = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCneh5RGuTN2NnyahnR9Nmx/cU5xCIDBruJ+RBAweH020DONybI6yHfPoI5iKQnuq2WgrdwcuoB6jLeoZZoW5gyh37iCG4cj1zNSjt7OXawHfqpnP+J7Wi8UZajDF9ygZhsYLzBk0LB2WXrRLGaGpV+NU5E87s1KnC7FEgPQ3uc6FC4Cnc84HZ94U0NbwZXZ+zPKvK8yv3rt7vIwf9/B/DqIZXcGKXc8jhYfa+/SHSpC8JMCTjzkUYU0SC86TKxkQANAV8inCgpLCK5YQp+K/KQhmTY7Hp1ocs1/Kz/rZaU+ge7B9S1KinwslZLgZEv+BgG1HycbSsr7RwgehlHS3ItAgMBAAECggEAGp9tBlOSH67jJof7Rsb3fDXtDjvBdF2znkE7di/b7YKVELLvtWy7W7OiG+c+wRoJ0i1BX9zEmj1SjNV/BWPaE946K1BPwLaBeBjez73YwjJh0GimrpRQ2+7UVWL4IUm8oy3Vk6gHKq2WaAnpeafUL9XldUyRa+gtN3AH7HU7xztcoFRgoia4Y1gAuvZ9KFqKmowkNaDJrv6gZ4hRqhlR5MMRRchXOrztR5GmnA8NFIjbsjx3FdMiKv6oca2ZrQW8M4K77RNTow/rabPM4AP9Em1mdtTYNQPc2xDhJmHRI6VhrdQXfJzuVC41CtSyHM4E2kj8vpjQbR0X+ZGME9G6gQKBgQC4HP3bJSYVmY+meDwDOaMcpLrJOwlTaSFmOAty3AdBKGJm+0cJffIi9Zk0dRnm5DYDketiX6LaSe3eoOb70pf0rX+MmNcN8aS0L4oIRP+ONxfBhsIiW4zP7KvB8hTUfLacRY1rQ0JbBLkWeQ/Y0+PTTrvata4GKfw7oE9okkZFvQKBgQDo3kGEGLoSAu1XriKkyPNhN5dDdiI0hEAlvhsfCBI7VCDVtP2FsDv94elLIlVAq2EErwFy2qWJxKzRjraxeWcy9DL1F59wdURWErriFikSj4euLSz49ZCip2Mx8HqLmvpn5AMzg8jGMhdlDIp3Zr2VdUMRqz326SJXBhm+YpuNMQKBgQCOqXhTPN/b0NesqHHoFds8MLDDiMlbJpVIvZixcaj1ZjOJlJ+gzUS4rhH+wdZGQQNRlNoNqglol+yHm6of6zjv0RiKe0v4dAupy0Rrz/st2abAwIjhUosz+jHE4K4fUFu3j3VbbgyWtnws27XZz6YzcEjD2g90m0flc/zUDLQDCQKBgBUqpp/gM4GRnIs8u89oqJ6sk+ZA5akKYF5N4l82t5mG8xkZw3WUaE+Sakc3DrK7IS1wztvmvedA5kiCBV8qXtQF2F/ozshFEHoWZ8BHLWKPg1C0sILMp2HxfxW5+xmXc61fz16uWuCRCwlXU3q47wCX0QnZG9/GnyVz24Evq13xAoGBAK6kSfX7YfEAAskKebPyKiT0ejZpFBX6PwesQV0iv1XQJRdmPcXuvRBqrIau9yKXMutKfD3xa6pMGSYxH8/6kaJwiYs5XGVVhjA5pfEIiRLJbaWgzULOfrlYju1T5aoERoEjR9R8JD5kLBXKQgoYv438AiU4RWLY6N8QwCuLZe/b";
         byte[] decodedPrivateKeyMasterBytes = Base64.getDecoder().decode(privateKeyMasterBase64);
         
-        // Criando a chave privada do Master a partir do Base64
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodedPrivateKeyMasterBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        PrivateKey privateKeyMaster = keyFactory.generatePrivate(keySpec);
-
         // Simulação da separação de variáveis no código
-        String cryptSilent = "coloque_o_resultado_do_codigo_anterior_aqui"; // Substitua isso pelo resultado gerado no código anterior
+        String cryptSilent = ""; // Substitua isso pelo resultado gerado no código anterior
 
         // Separando as partes do resultado criptografado
         String[] parts = cryptSilent.split(",");
@@ -78,10 +73,10 @@ public class Main {
         String info_crypt = new String(base64dec(parts[3]));
 
         // Descriptografar a chave AES com a chave privada do Master
-        SecretKey decryptedAESKey = decryptRSA(encryptedAESKey, privateKeyMaster);
+        SecretKey decryptedAESKey = decryptRSA(encryptedAESKey, decodedPrivateKeyMasterBytes);
 
         // Descriptografar as informações com a chave AES
-        String decryptedInfo = decryptAES(info_crypt, decryptedAESKey);
+        String decryptedInfo = decryptAES(info_crypt, decryptrdAESKEY);
         String decryptedId = decryptAES(id_crypt, decryptedAESKey);
         String decryptedPublicKeyClient = decryptAES(cryptpublickeyclient, decryptedAESKey);
 
