@@ -124,4 +124,12 @@ public class Client {
                 + base64enc(info_crypt.getBytes());
         return cryptSilent;
     }
+    public static void main(String[] args) {
+     try {
+        String net = cryptSilent();
+        print(net);  
+     } catch (Exception e) {
+        e.printStackTrace();
+     }
+    }
 }
