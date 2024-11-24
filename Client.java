@@ -65,7 +65,7 @@ public class Main {
 
     public static String SilentNet() throws Exception {
         // CHAVE PUBLICA DO MASTER
-        String KeyPublicMaster = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp3oeURrkzdjZ8moZ0fTZsf3FOcQiAwa7ifkQQMHh9NtAzjcmyOsh3z6COYikJ7qtloK3cHLqAeoy3qGWaFuYMod+4ghuHI9czUo7ezl2sB36qZz/ie1ovFGWowxfcoGYbGC8wZNCwdll60SxmhqVfjVORPO7NSpwuxRID0N7nOhQuAp3POB2feFNDW8GV2fszyryvMr967e7yMH/fwfw6iGV3Bil3PI4WH2vv0h0qQvCTAk485FGFNEgvOkysZEADQFfIpwoKSwiuWEKfivykIZk2Ox6daHLNfys/62WlPoHuwfUtSop8LJWS4GRL/gYBtR8nG0rK+0cIHoZR0tyLQIDAQAB";
+        String KeyPublicMaster = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsHi9vIE/hweFP7Fys6hGj4UUQombAYR9V1ZSQ+f3R+AUDd0aDNg+Pf9aM/uYvyEfbBFt4EDuZ6pbpnPZSubZ+AbYi7x/aGT4RZiTMXxntLk7eb5t/K3mIkYit0APd7mp6F7eTolZS5f6ENJi82+39PwgYH4CH3VPtI1GUNOHeByh/5L+pH9X4E08y7FzQgLeIw4fHHQkiIPMBEjNr9/0UyfN18NiB7xrfWhtwO8bsGddQylGc5Mv0xF6zeq66vyuRPq7dYJ2Z8p+RvQS5FjRwp7/eGFb8Vs59LFkIY3b1vA1TXfvWkuRlysYmCxNO4FMYgSSsrPxyYiK+P/oSHM6rwIDAQAB";
         byte[] decodedBytes = Base64.getDecoder().decode(KeyPublicMaster);
         String idAleatorio = UUID.randomUUID().toString();
 
