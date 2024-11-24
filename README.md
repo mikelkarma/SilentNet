@@ -73,7 +73,59 @@ Além disso, os comandos enviados pelo Cliente Master serão protegidos para gar
 - **Confidencialidade**: Se o comando for criptografado, apenas o destinatário correto poderá lê-lo, garantindo que a informação não seja interceptada.
 - **Segurança na Troca de Chaves**: A chave AES usada para criptografar as mensagens é protegida pelo algoritmo RSA, garantindo que apenas o Cliente Master tenha a chave privada necessária para descriptografá-la.
 
+## O Que o Cliente Faz na Hora de Enviar e Receber Dados
+
+### Envio de Dados
+
+1. **Preparação da Mensagem**:
+   - O **Cliente** gera uma mensagem para enviar a outro cliente ou ao Cliente Master.
+   - A mensagem é primeiro criptografada com a chave AES gerada pelo cliente.
+   - A chave pública do destinatário (ou do Cliente Master) é utilizada para criptografar a chave AES.
+
+2. **Envio da Mensagem Criptografada**:
+   - A mensagem criptografada, junto com a chave AES criptografada, é enviada para o destinatário.
+   - O **Cliente** usa a porta de comunicação 12137 para fazer a conexão e enviar os dados para o destinatário ou Cliente Master.
+
+3. **Comunicação com Outros Clientes**:
+   - Se o Cliente não é o destinatário final, ele repassará a mensagem para outros clientes, garantindo que ela seja entregue ao destinatário final, sem modificar o conteúdo.
+
+### Recebimento de Dados
+
+1. **Recepção da Mensagem Criptografada**:
+   - O **Cliente** recebe uma mensagem criptografada e verifica se a mensagem é para ele, conferindo o ID do destinatário.
+   - Se for a mensagem destinada ao Cliente, ele prossegue para o próximo passo.
+
+2. **Descriptografando a Chave AES**:
+   - O **Cliente** usa sua chave privada para **descriptografar** a chave AES (caso ela tenha sido criptografada com a chave pública do Cliente).
+   
+3. **Descriptografando a Mensagem**:
+   - Após obter a chave AES, o **Cliente** a usa para **descriptografar** a mensagem original que foi enviada.
+
+4. **Processamento da Mensagem**:
+   - O **Cliente** processa a mensagem, realizando a ação correspondente de acordo com os dados recebidos.
+
+## O Que o Cliente Master Faz na Hora de Enviar e Receber Dados
+
+### Envio de Comandos
+
+1. **Criação do Comando**:
+   - O **Cliente Master** gera um comando (mensagem ou instrução) para ser enviado a um ou mais clientes.
+   
+2. **Assinatura e Criptografia**:
+   - O **Cliente Master** assina digitalmente o comando com sua chave privada.
+   - Se o comando contiver dados sensíveis, ele é criptografado com a chave pública do destinatário ou do Cliente Master.
+
+3. **Envio do Comando**:
+   - O **Cliente Master** envia o comando assinado e criptografado para os clientes, garantindo que apenas o destinatário correto possa processá-lo.
+
+### Recebimento de Comandos
+
+1. **Recepção do Comando**:
+   - O **Cliente Master** recebe um comando de outro cliente e verifica a assinatura digital usando a chave pública do cliente remetente.
+
+2. **Descriptografia do Comando**:
+   - Se a assinatura for válida, o **Cliente Master** descriptografa a mensagem (se criptografada) e processa a informação.
+
 ## Conclusão
 
-Esse sistema oferece um alto nível de segurança e confidencialidade para a comunicação anônima entre clientes. A criptografia híbrida (AES + RSA) garante que as mensagens sejam protegidas, enquanto as assinaturas digitais e o uso de chaves públicas e privadas asseguram a autenticidade e a integridade das mensagens trocadas entre os clientes e o Cliente Master.
-
+O sistema proposto garante a segurança, confidencialidade e integridade das mensagens e comandos enviados entre os clientes e o Cliente Master, utilizando criptografia avançada e assinaturas digitais.
