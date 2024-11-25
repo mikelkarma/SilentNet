@@ -66,7 +66,7 @@ public class Main {
 
     public static String SilentNet() throws Exception {
         // CHAVE PUBLICA DO MASTER (exemplo fictício)
-        String KeyPublicMaster = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp3oeURrkzdjZ8moZ0fTZsf3FOcQiAwa7ifkQQMHh9NtAzjcmyOsh3z6COYikJ7qtloK3cHLqAeoy3qGWaFuYMod+4ghuHI9czUo7ezl2sB36qZz/ie1ovFGWowxfcoGYbGC8wZNCwdll60SxmhqVfjVORPO7NSpwuxRID0N7nOhQuAp3POB2feFNDW8GV2fszyryvMr967e7yMH/fwfw6iGV3Bil3PI4WH2vv0h0qQvCTAk485FGFNEgvOkysZEADQFfIpwoKSwiuWEKfivykIZk2Ox6daHLNfys/62WlPoHuwfUtSop8LJWS4GRL/gYBtR8nG0rK+0cIHoZR0tyLQIDAQAB";
+        String KeyPublicMaster = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAre1vts+pa1WKQWBLLVGVmCCYHE7J+8GivCvK1lhJwI83TFGlQwCMyYjP5MGzgjwb6l/j8bmhuLLF5wj4VkeJQdaSi8ZUSZKq13IN0Ylh2CI3NsYMDDtHDow5RhJxXRvjLja+AMG0JH18+vTAb37yh8jW+UiTSdBcrZHdb9DUQGZcdr4bCodEmg5g3o9ToUbvlpF6pyCETJzQsdGe5Zdbn3/iOYADGXHYfjLqa16pmuU0Li8bMjRsSGOm50PenddEEKeGIBaf+z9HxHz3VkHHkmfp/hhJsLk3pDJiBUOrltqo6fEiajeKq1O68Zz+lo0o2Y0ILdhNRt9IkImsMvHX5QIDAQAB";
         byte[] decodedBytes = Base64.getDecoder().decode(KeyPublicMaster);
         String idAleatorio = UUID.randomUUID().toString();
 
