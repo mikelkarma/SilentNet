@@ -1,3 +1,13 @@
+// > Gerando chave AES...
+// > Chave AES gerada.
+// > Criptografando dados com AES...
+// > Dados criptografados com AES.
+// > Criptografando chave AES com RSA...
+// > Chave AES criptografada com RSA: gD9j9tb/dYlv7KBrD0aJ3K8pXoNuXn5Ya170AsoL7eH6Av6iDTLIOM9OBXAkdY7ZEth6vWbaPGpRBDbdyXwZoaUolSRofyns9rQ47qKcpigN032Ws0Iwm6CMTk9Cl2bicdASq3OEGDlyEvDuXek6uyegZQ0QSrVxxaEX9JkryXAhPu02Y3dspaGEVjvaDYMDMea7L/g5/hOEHFuqojfeaHlVRf8HCAuWp4WSTosq6m/PDqY1vO0qpjGCn0PkDN+2XCjOUqbf6pUnQe26Gdi0gmQ3tHB+oEbyOA37GmlCa+Wli9QR38oWXK0qMH2lRoQ/YlToyA9W2ln+760MZqaIUA==
+// > Mensagem criptografada com AES: QkawECchSB5THEpOdo5Qf3INffU17iS/GP6TYtitWn4=
+
+[Execution complete with exit code 0]
+     
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
