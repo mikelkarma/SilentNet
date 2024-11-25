@@ -5,6 +5,7 @@ import java.util.Base64;
 import java.util.UUID;
 
 public class Main {
+
     // Gerar chave RSA
     public static KeyPair generateRSAKey() throws Exception {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
@@ -64,7 +65,7 @@ public class Main {
     }
 
     public static String SilentNet() throws Exception {
-        // CHAVE PUBLICA DO MASTER
+        // CHAVE PUBLICA DO MASTER (exemplo fictício)
         String KeyPublicMaster = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp3oeURrkzdjZ8moZ0fTZsf3FOcQiAwa7ifkQQMHh9NtAzjcmyOsh3z6COYikJ7qtloK3cHLqAeoy3qGWaFuYMod+4ghuHI9czUo7ezl2sB36qZz/ie1ovFGWowxfcoGYbGC8wZNCwdll60SxmhqVfjVORPO7NSpwuxRID0N7nOhQuAp3POB2feFNDW8GV2fszyryvMr967e7yMH/fwfw6iGV3Bil3PI4WH2vv0h0qQvCTAk485FGFNEgvOkysZEADQFfIpwoKSwiuWEKfivykIZk2Ox6daHLNfys/62WlPoHuwfUtSop8LJWS4GRL/gYBtR8nG0rK+0cIHoZR0tyLQIDAQAB";
         byte[] decodedBytes = Base64.getDecoder().decode(KeyPublicMaster);
         String idAleatorio = UUID.randomUUID().toString();
@@ -78,7 +79,7 @@ public class Main {
 
         String info = String.format("OS: %s, Arch: %s, Version: %s, Host: %s, Cores: %s", osName, osArch, osVersion, hostName, cores);
 
-        // CLIENTE CRIPTOGRAFA A CHAVE PUBLICA CLIENT COM AES
+        // CLIENTE CRIPTOGRAFA A CHAVE PÚBLICA DO CLIENTE COM AES
         KeyPair rsaClientKeyPair = generateRSAKey();
         PublicKey publicKeyClient = rsaClientKeyPair.getPublic();
         PrivateKey privateKeyClient = rsaClientKeyPair.getPrivate();
@@ -91,8 +92,11 @@ public class Main {
         String cryptpublickeyclient = encryptAES(base64enc(publicKeyClient.getEncoded()), keyAES);
         System.out.println(" > Chave pública do cliente criptografada com AES: " + cryptpublickeyclient);
 
-        // CRIPTOGRANFANDO A CHAVE AES COM A CHAVE PUBLICA DO MASTER
-        String encryptedAESKey = encryptRSA(keyAES, decodedBytes.getPublic());
+        // CRIPTOGRAFANDO A CHAVE AES COM A CHAVE PUBLICA DO MASTER
+        // Corrigido para usar o método correto
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey rsaPublicKeyMaster = keyFactory.generatePublic(new X509EncodedKeySpec(decodedBytes));
+        String encryptedAESKey = encryptRSA(keyAES, rsaPublicKeyMaster);
         System.out.println(" > Chave AES criptografada com RSA (pelo Public Master): " + encryptedAESKey);
 
         // Criptografando as informações com a chave AES
@@ -106,12 +110,11 @@ public class Main {
                 + base64enc(info_crypt.getBytes());
         return cryptSilent;
     }
-    
+
     public static void main(String[] args) {
         try {
             String net = SilentNet();
             System.out.println("Dados criptografados: " + net);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
