@@ -1,93 +1,36 @@
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.*;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.Base64;
 
-public class Main {
+public class MasterKeyGenerator {
 
-    // Gerar chave RSA para o cliente
-    public static KeyPair generateRSAKey() throws Exception {
+    public static void generateMasterKeys() throws Exception {
+        // Gerar o par de chaves RSA
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048); 
-        return keyPairGenerator.generateKeyPair();
-    }
+        keyPairGenerator.initialize(2048); // Tamanho da chave em bits
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
-    // Criptografar com RSA
-    public static String encryptRSA(SecretKey aesKey, PublicKey rsaPublicKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, rsaPublicKey);
-        byte[] encryptedAESKey = cipher.doFinal(aesKey.getEncoded());
-        return Base64.getEncoder().encodeToString(encryptedAESKey);
-    }
+        // Obter a chave pública e privada
+        PublicKey publicKey = keyPair.getPublic();
+        PrivateKey privateKey = keyPair.getPrivate();
 
-    // Descriptografar com RSA
-    public static SecretKey decryptRSA(String encryptedAESKey, PrivateKey rsaPrivateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, rsaPrivateKey);
-        byte[] decodedEncryptedAESKey = Base64.getDecoder().decode(encryptedAESKey);
-        byte[] decryptedAESKey = cipher.doFinal(decodedEncryptedAESKey);
-        return new SecretKeySpec(decryptedAESKey, "AES");
-    }
+        // Codificar as chaves em Base64 para facilitar a visualização
+        String publicKeyBase64 = Base64.getEncoder().encodeToString(publicKey.getEncoded());
+        String privateKeyBase64 = Base64.getEncoder().encodeToString(privateKey.getEncoded());
 
-    // Gerar chave AES
-    public static SecretKey generateAESKey() throws Exception {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(128); 
-        return keyGenerator.generateKey(); 
-    }
+        // Imprimir as chaves no console
+        System.out.println("Chave Pública Mestre (Base64):");
+        System.out.println(publicKeyBase64);
 
-    // Criptografar com AES
-    public static String encryptAES(String data, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, key); 
-        byte[] encryptedData = cipher.doFinal(data.getBytes());
-        return Base64.getEncoder().encodeToString(encryptedData);
-    }
-
-    // Descriptografar com AES
-    public static String decryptAES(String data, SecretKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        byte[] decodedData = Base64.getDecoder().decode(data);
-        byte[] decryptedData = cipher.doFinal(decodedData);
-        return new String(decryptedData);
-    }
-
-    // Assinar dados com a chave privada RSA do Cliente
-    public static String signData(byte[] data, PrivateKey privateKey) throws Exception {
-        Signature signature = Signature.getInstance("SHA256withRSA");
-        signature.initSign(privateKey);
-        signature.update(data);
-        byte[] signedData = signature.sign();
-        return Base64.getEncoder().encodeToString(signedData);
-    }
-
-    // verificacao de chave
-    public static boolean verifySignature(byte[] data, String signatureStr, PublicKey publicKey) throws Exception {
-        Signature signature = Signature.getInstance("SHA256withRSA");
-        signature.initVerify(publicKey);
-        signature.update(data);
-        byte[] signatureBytes = Base64.getDecoder().decode(signatureStr);
-        return signature.verify(signatureBytes);
-    }
-
-    // Funcao para printar na tela
-    public static void print(String text) {
-        System.out.println(text);
+        System.out.println("\nChave Privada Mestre (Base64):");
+        System.out.println(privateKeyBase64);
     }
 
     public static void main(String[] args) {
         try {
-            // Gerar as chaves RSA para o Cliente Master e Cliente
-            KeyPair rsaMasterKeyPair = generateRSAKey(); 
-            PublicKey publicKeyMaster = rsaMasterKeyPair.getPublic();
-            PrivateKey privateKeyMaster = rsaMasterKeyPair.getPrivate();
-
-            print("Public Key1: " + Base64.getEncoder().encodeToString(publicKeyMaster.getEncoded()));
-            print("Pribate Key2: " + Base64.getEncoder().encodeToString(privateKeyMaster.getEncoded()));
-            
+            generateMasterKeys(); // Chama o método para gerar e imprimir as chaves
         } catch (Exception e) {
             e.printStackTrace();
         }
