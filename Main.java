@@ -119,29 +119,40 @@ public class Main {
             // Gerar chave AES e criptografar dados
             SecretKey aesKey = generateAESKey();
             String data = "Informação confidencial";
-            print("Chave AES gerada: " + Base64.getEncoder().encodeToString(aesKey.getEncoded()));
+
+            // Assinar a mensagem
+            String signature = signData(data.getBytes(), privateKeyClient);
+            print(" > mensagem assinando ");
+            
+            print(" > Gerando Chave AES: " + Base64.getEncoder().encodeToString(aesKey.getEncoded()));
 
             String encryptedData = encryptAES(data, aesKey);
-            print("Mensagem criptografada com AES: " + encryptedData);
+            print(" > Mensagem criptografada com AES: " + encryptedData);
 
             // Criptografar a chave AES com RSA
             String encryptedAESKey = encryptRSA(aesKey, publicKeyMaster);
-            print("Chave AES criptografada com RSA: " + encryptedAESKey);
+            print(" > Chave AES criptografada com RSA: " + encryptedAESKey);
 
-            // Assinar a mensagem
-            String signature = signData(encryptedData.getBytes(), privateKeyClient);
-            print("Assinatura da mensagem: " + signature);
+            
 
+            // criptografa do assinatura com AES
+            String encryptedSign = encryptAES(signature, aesKey);
+            print(" > Assinatura criptogrfada: " + encryptedSign);
+
+            print(" > decrypt...");
             // Verificar e descriptografar
             SecretKey decryptedAESKey = decryptRSA(encryptedAESKey, privateKeyMaster);
-            boolean isSignatureValid = verifySignature(encryptedData.getBytes(), signature, publicKeyClient);
-            print("Assinatura válida: " + isSignatureValid);
+            print(" > Chave Descriptografada");
 
+            String sigdec = decryptAES(encryptedSign, aesKey);
+            print(" > Assinatura descriptografada");
+            
             String decryptedData = decryptAES(encryptedData, decryptedAESKey);
-            print("Mensagem descriptografada: " + decryptedData);
-
-            print("Chave pública Master: " + Base64.getEncoder().encodeToString(publicKeyMaster.getEncoded()));
-            print("Chave privada Master: " + Base64.getEncoder().encodeToString(privateKeyMaster.getEncoded()));
+            
+            print(" > Mensagem descriptografada: " + decryptedData);
+            
+            boolean isSignatureValid = verifySignature(decryptedData.getBytes(), sigdec, publicKeyClient);
+            print(" > Verificando assinatura da mensagem: " + isSignatureValid);
 
         } catch (Exception e) {
             e.printStackTrace();
