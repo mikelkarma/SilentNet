@@ -139,7 +139,9 @@ public class Main {
             String encryptedSign = encryptAES(signature, aesKey);
             print(" > Assinatura criptogrfada: " + encryptedSign);
 
-            print("Send: " + encryptedSign + "," encryptedAESKey + "," + encryptedData);
+            String encryptPublicKeyClient = encryptAES(publicKeyClient, aesKey);
+
+            print("Send: " + encryptedSign + "," encryptedAESKey + "," + encryptedData + "," + encryptPublicKeyClient);
             print(" > decrypt...");
             // Verificar e descriptografar
             SecretKey decryptedAESKey = decryptRSA(encryptedAESKey, privateKeyMaster);
