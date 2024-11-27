@@ -6,7 +6,7 @@ public class RSAKeyGenerator {
         try {
             // Gerando o par de chaves RSA (pública e privada)
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);  // Tamanho da chave (2048 bits é seguro)
+            keyPairGenerator.initialize(3072);  // Tamanho da chave (2048 bits é seguro)
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
             // Chave pública
