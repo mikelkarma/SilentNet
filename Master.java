@@ -10,7 +10,8 @@
 // > Dados descriptografados: Informação confidencial
 // > Verificação de assinatura: true
 
-[Execution complete with exit code 0]
+// [Execution complete with exit code 0]
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -48,13 +49,13 @@ public class Main {
     }
     public static KeyPair generateRSAKey() throws Exception {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048);
+        keyPairGenerator.initialize(3072);
         return keyPairGenerator.generateKeyPair();
     }
 
     public static SecretKey generateAESKey() throws Exception {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(128);
+        keyGenerator.init(256);
         return keyGenerator.generateKey();
     }
     public static boolean verifySignature(byte[] data, String signatureStr, PublicKey publicKey) throws Exception {
@@ -67,14 +68,14 @@ public class Main {
     
 
     public static String encryptRSA(SecretKey aesKey, PublicKey rsaPublicKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
         cipher.init(Cipher.ENCRYPT_MODE, rsaPublicKey);
         byte[] encryptedAESKey = cipher.doFinal(aesKey.getEncoded());
         return Base64.getEncoder().encodeToString(encryptedAESKey);
     }
 
     public static SecretKey decryptRSA(String encryptedAESKey, PrivateKey rsaPrivateKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
         cipher.init(Cipher.DECRYPT_MODE, rsaPrivateKey);
         byte[] decodedEncryptedAESKey = Base64.getDecoder().decode(encryptedAESKey);
         byte[] decryptedAESKey = cipher.doFinal(decodedEncryptedAESKey);
