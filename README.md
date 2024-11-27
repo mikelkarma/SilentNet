@@ -1,3 +1,5 @@
+### Nao terminei ainda ;-;
+
 # Sistema de Comunicação Anônima com Criptografia Avançada
 
 O objetivo deste sistema é criar uma plataforma de comunicação anônima e segura, permitindo que os clientes se comuniquem entre si e compartilhem informações de forma confidencial e sem riscos de interceptação. O sistema será composto por dois componentes principais: o **Cliente** e o **Cliente Master**.
