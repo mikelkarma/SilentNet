@@ -27,7 +27,6 @@ public class Main {
 
     static {
         try {
-            // Chave RSA master fornecida em Base64 (em um ambiente real, isso seria uma chave real)
             String base64MasterPublicKey = "MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEArLA9rcHRjIG2vNTJmS3zMBgYEkuJMZCrpRUCstBK48Uwdp+1zNxxj81e/XLayN8dD8qNIusWckgyUGDTM4LNv+XdKCVgQaDV0jOeIfJqYFK6cPGf2UsDfcWUwpNi/UChv8HD9QI+qglxumYJuY/ttaOrxMUEhnIcnBMgcHb3P+dlsx1VrNfz3oh1UwqrYVglgy1w0sNeNVvOLIjuxbDPnq2wh5dnC+GogxXdB4TXQdeXzOB8gp3Cbc4CW9aycIRnyrrV9ywBaosulgUKwDvtHXk8YjhnyNyviwnoRA4TLnraFTET/BuqaR9sJ1FJ85UNGF+ElAp0u4e354NvPId0oaamaQhGL8xL3aAJgOCmto3xi5Tar7OGJ5WTGzxtAmOcqps3skXFYVcM9KFy19oFymTHkvu556sP648zSTr+jXGO+a1A7SXWv2cEpv3RrqOR8+UQkKRl9ldxKGZ8ePQ4m7etzFxuljYJl08k77q41s9a+HFdYa7qn9Rz+o5OrsG7AgMBAAE=";
             // Convertendo as chaves de Base64 para Key objects
             byte[] publicKeyBytes = Base64.getDecoder().decode(base64MasterPublicKey);
